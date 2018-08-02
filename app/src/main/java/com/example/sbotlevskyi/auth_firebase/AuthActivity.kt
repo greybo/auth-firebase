@@ -1,8 +1,6 @@
 package com.example.sbotlevskyi.auth_firebase
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -72,12 +70,12 @@ class AuthActivity : AppCompatActivity() {
     fun hasSigned(): Boolean {
         var emailVerified: Boolean = false
         val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-            emailVerified = user.isEmailVerified
-            val uid = user.uid
+        user?.let {
+            val name = it.displayName
+            val email = it.email
+            val photoUrl = it.photoUrl
+            emailVerified = it.isEmailVerified
+            val uid = it.uid
         }
         return emailVerified
     }
